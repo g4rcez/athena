@@ -1,6 +1,6 @@
 # JS Validations
 
-**A little collection with data validation, in Javascript...off course**
+**A little collection with data validation, in Javascript...of course**
 
 The focus of this validations:
 
