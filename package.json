@@ -1,0 +1,20 @@
+{
+	"name": "js-validations",
+	"version": "1.0.0",
+	"description": "A little collection with data validation, in Javascript...of course",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "node ./tests.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vandalvnl/js-validations.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/vandalvnl/js-validations/issues"
+	},
+	"homepage": "https://github.com/vandalvnl/js-validations#readme"
+}
