@@ -1,6 +1,6 @@
-const regex = require('./src');
+const regex = require('../src');
 const schema = {
-	username: [regex.string, regex.brazilianName],
+	username: [regex.string, regex.brazilianName]
 };
 const validate = regex.validate({ username: 'Allan Garcez1' }, schema);
 console.log(validate);
