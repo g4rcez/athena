@@ -1,11 +1,14 @@
-const schemaParser = (schema, value) => {
-	let validations = [];
-	for (let fn in schema) {
-		array(schema[fn])
-			? schema[fn].map((x) => validations.push(x(value)))
-			: validations.push(schema[fn](value));
+const schemaParser = (array) => {
+
+	return (schema, value) => {
+		let validations = [];
+		
+		array(schema)
+			? schema.map((x) => validations.push(x(value)))
+			: validations.push(schema(value));
+			
+		return validations;
 	}
-	return validations;
 };
 
 

@@ -17,25 +17,46 @@ const actions = {
 	},
     min: (n) => {
         return actions.number(n) 
-            ? (s => actions.string(s) ? s.length <= n : `${s} is not a string`) 
+            ? (s => actions.string(s) ? s.length >= n : `${s} is not a string`) 
             : `${n} is not a number`
     },
     max: (n) => {
         return actions.number(n) 
-            ? (s => actions.string(s) ? s.length >= n : `${s} is not a string`) 
+            ? (s => actions.string(s) ? s.length <= n : `${s} is not a string`) 
             : `${n} is not a number`
     },
     positive: (n) => type.number.positive(n),
 	negative: (n) => type.number.negative(n),
 };
 
+
+(function () {
+	// Create regex validations properties
+	Object.keys(regex).forEach(function(validation) {
+		actions[validation] = function(string) {
+			let value = string.match(regex[validation]);
+			return value === null ? false : value[0] === string;
+		};
+		actions.regex[validation] = regex[validation];
+	});
+
+})();
+
 actions.validate = (anything, schema) => {
-    let validations = {};
+	let validations = {};
+	
+	const parser = schemaParser(actions.array);
     
 	for (const value in anything) {
-		validations[value] = schemaParser(schema, anything[value]);
+		
+		validations[value] = parser(schema[value], anything[value]);
 	}
+	
 	return validations;
+};
+
+actions.isValid = function(string, validationType) {
+	return string === undefined ? false : actions[validationType](string);
 };
 
 Object.freeze(actions);
