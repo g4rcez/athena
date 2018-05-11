@@ -12,9 +12,7 @@ describe('User Schema', () => {
 			email: 'tests@gmail.com'
 		}
 
-		const result = validation.validate(data, schema.user)
-
-		expect(result)
+		const result = validation.validate(data, schema.user);
 
 	});
 
