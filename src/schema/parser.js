@@ -12,6 +12,4 @@ const schemaParser = (array) => {
 };
 
 
-module.exports = {
-    schemaParser
-};
+module.exports = schemaParser;
