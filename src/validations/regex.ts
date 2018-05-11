@@ -1,4 +1,4 @@
-const regex = {
+module.exports = Object.keys({
 	brazilianName: /^[A-ZÇa-zç 'ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÃẼĨÕŨãẽĩõũ]{1,205}$/,
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
 	username: /^[a-z_\-0-9]{1,64}$/,
@@ -27,6 +27,4 @@ const regex = {
 	yes: RegExp('(yes|sim|y|s)', 'gi'),
 	no: RegExp('(n(a|ã)o|no|n)', 'gi'),
 	cnpj: /^\d{2}((|\.)\d{3}){2}(|\/)\d{4}(|-)\d{2}$/,
-};
-
-module.exports = regex;
+});

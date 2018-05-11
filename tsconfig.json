@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"target": "ES2017",
+		"module": "commonjs",
+		"types": ["node"],
+		"typeRoots": ["node_modules/@types"],
+		"strict": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
+		"noImplicitAny": false,
+		"noImplicitReturns": true,
+		"strictNullChecks": false,
+		"noUnusedParameters": false
+	}
+}

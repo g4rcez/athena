@@ -1,3 +1,4 @@
+export {};
 const type = require('./types');
 const dates = require('./dates');
 const Cpf = require('./cpf');
@@ -6,30 +7,32 @@ const schemaParser = require('../schema');
 
 let actions = {
 	regex: {},
-	isValid: function() {},
-	array: (a) => type.array(a),
-	string: (s) => type.string(s),
-	number: (n) => type.number(n),
-	integer: (i) => type.integer(i),
-	float: (f) => type.float(f),
-	empty: (e) => {
+	array: (a: Array<any>) => type.array(a),
+	string: (s: string) => type.string(s),
+	number: (n: number) => type.number(n),
+	integer: (i: number) => type.integer(i),
+	float: (f: number) => type.float(f),
+	empty: (e: any) => {
 		return actions.array(e)
 			? e.length === 0
 			: e === undefined && e === null && !(Object.keys(e) || e).length === 0;
 	},
-	min: (n) => {
+	min: (n: number) => {
 		return actions.number(n)
 			? (s) => (actions.string(s) ? s.length >= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
-	max: (n) => {
+	max: (n: number) => {
 		return actions.number(n)
 			? (s) => (actions.string(s) ? s.length <= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
-	positive: (n) => type.number.positive(n),
-	negative: (n) => type.number.negative(n),
+	positive: (n: number) => type.number.positive(n),
+	negative: (n: number) => type.number.negative(n),
 	dates,
+	validate: (anything: any, schema: object) => {},
+	isValid: (string: string, validationType: Function) => {},
+	cpf: (cpf: string) => {},
 };
 
 // Create regex validations properties
@@ -57,4 +60,5 @@ actions.isValid = function(string, validationType) {
 	return string === undefined ? false : actions[validationType](string);
 };
 
+actions = Object.freeze(actions);
 module.exports = actions;
