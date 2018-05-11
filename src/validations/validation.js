@@ -1,4 +1,4 @@
-const { types: type } = require('./types');
+const type = require('./types');
 const dates = require('./dates');
 const Cpf = require('./cpf');
 const regex = require('./regex.js');
