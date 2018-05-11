@@ -40,6 +40,9 @@ const actions = {
 	});
 })();
 
+// @Override
+actions.cpf = (x) => Cpf(x);
+
 actions.validate = (anything, schema) => {
 	let validations = {};
 
