@@ -2,7 +2,7 @@ const { types: type } = require('./types');
 const dates = require('./dates');
 const Cpf = require('./cpf');
 const regex = require('./regex.js');
-const { schemaParser } = require('../schema');
+const schemaParser = require('../schema');
 
 let actions = {
 	regex: {},
