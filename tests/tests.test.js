@@ -1,4 +1,4 @@
-const { validation } = require('../src');
+const validation = require('../src');
 const schema = require('./schemas');
 const expect = require('expect');
 
