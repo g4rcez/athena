@@ -8,7 +8,7 @@ const getYear = (date: string = '') => date.split(new RegExp('(/|-| )')).pop();
 const yearToInt = (year: string = '') => {
 	let intYear: number = 1;
 	try {
-		let tmp = !!intYear ? intYear : '';
+		let tmp: string = !!intYear ? intYear.toString() : '';
 		intYear = parseInt(tmp);
 	} catch (error) {}
 	return intYear % 4 === 0;

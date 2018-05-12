@@ -2,7 +2,7 @@ export {};
 const type = require('./types');
 const dates = require('./dates');
 const Cpf = require('./cpf');
-const regex = require('./regex.js');
+const regex = require('./regex');
 const schemaParser = require('../schema');
 
 let actions = {
@@ -13,9 +13,8 @@ let actions = {
 	integer: (i: number) => type.integer(i),
 	float: (f: number) => type.float(f),
 	empty: (e: any) => {
-		return actions.array(e)
-			? e.length === 0
-			: e === undefined && e === null && !(Object.keys(e) || e).length === 0;
+		let condition = Object.keys(e).length === 0 || e.length === 0;
+		return actions.array(e) ? e.length === 0 : e === undefined && e === null && !condition;
 	},
 	min: (n: number) => {
 		return actions.number(n)
@@ -29,10 +28,10 @@ let actions = {
 	},
 	positive: (n: number) => type.number.positive(n),
 	negative: (n: number) => type.number.negative(n),
-	dates,
 	validate: (anything: any, schema: object) => {},
 	isValid: (string: string, validationType: Function) => {},
 	cpf: (cpf: string) => {},
+	dates,
 };
 
 // Create regex validations properties
@@ -49,15 +48,18 @@ actions.cpf = (x) => Cpf(x);
 
 actions.validate = (anything, schema) => {
 	let validations = {};
-	const parser = schemaParser(actions.array);
+	const parser: Function = schemaParser(actions.array);
 	for (const value in anything) {
 		validations[value] = parser(schema[value], anything[value]);
 	}
+	// return schemaParser
 	return validations;
 };
 
-actions.isValid = function(string, validationType) {
-	return string === undefined ? false : actions[validationType](string);
+// Validate one string value
+actions.isValid = function(string: string, validationType: any) {
+	let fn = actions[validationType];
+	return string === undefined ? false : fn(string);
 };
 
 actions = Object.freeze(actions);
