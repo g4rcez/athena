@@ -14,7 +14,7 @@ describe('User Schema', () => {
 
 		const result = validation.validate(data, schema.user)
 
-		expect(result)
+		console.log(result);
 
 	});
 
