@@ -5,7 +5,7 @@ const schemaParser = (isArray: Function) => {
 		try {
 			isArray(schema) ? schema.map((x) => validations.push(x(value))) : validations.push(schema(value));
 		} catch (error) {}
-		return validations;
+		return validations.filter(Boolean).length === validations.length;
 	};
 };
 

@@ -16,12 +16,18 @@ let actions = {
 		let condition = Object.keys(e).length === 0 || e.length === 0;
 		return actions.array(e) ? e.length === 0 : e === undefined && e === null && !condition;
 	},
-	min: (n: number) => {
+	minLength: (n: number) => {
 		return actions.number(n)
 			? (s) => (actions.string(s) ? s.length >= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
+	min: (n: number) => {
+		return actions.number(n) ? (s) => s >= n : false;
+	},
 	max: (n: number) => {
+		return actions.number(n) ? (s) => s <= n : false;
+	},
+	maxLength: (n: number) => {
 		return actions.number(n)
 			? (s) => (actions.string(s) ? s.length <= n : `${s} is not a string`)
 			: `${n} is not a number`;
@@ -49,11 +55,11 @@ actions.cpf = (x) => Cpf(x);
 actions.validate = (anything, schema) => {
 	let validations = {};
 	const parser: Function = schemaParser(actions.array);
-	for (const value in anything) {
-		validations[value] = parser(schema[value], anything[value]);
+	for (let value in anything) {
+		const sourceTrue = parser(schema[value], anything[value]);
+		validations[value] = sourceTrue;
 	}
-	// return schemaParser
-	return validations;
+	return Object.keys(anything).length === Object.values(validations).filter(Boolean).length;
 };
 
 // Validate one string value
