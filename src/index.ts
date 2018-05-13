@@ -1,3 +1,3 @@
 const validation = require('./validations');
 
-module.exports = validation;
+module.exports = Object.freeze(validation);

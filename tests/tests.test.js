@@ -1,4 +1,4 @@
-const { validation } = require('../src');
+const validation = require('../src');
 const schema = require('./schemas');
 const expect = require('expect');
 
@@ -13,8 +13,6 @@ describe('User Schema', () => {
 		}
 
 		const result = validation.validate(data, schema.user)
-
-		console.log(result);
 
 	});
 
