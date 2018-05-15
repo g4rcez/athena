@@ -4,8 +4,11 @@ const verify = (rest: number) => rest == 10 || rest == 11;
 const modRest = (sum: number) => (sum * 10) % 11;
 
 const cpf = (str: string) => {
-	if (!type.string) return false;
-	const cpf = str.replace(/-/g, '').replace(/\./g, '');
+	if (!type.string(str)) return false;
+	const cpf = str
+		.replace(/-/g, '')
+		.replace(/\./g, '')
+		.replace('/ /g', '');
 	let checkSum = 0;
 	let rest;
 	for (let i: number = 1; i <= 9; i++)
