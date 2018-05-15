@@ -52,7 +52,7 @@ Object.keys(regex).forEach(function(validation) {
 // @Override
 actions.cpf = (x) => Cpf(x);
 
-actions.validate = (anything, schema) => {
+actions.validate = (schema, anything) => {
 	let validations = {};
 	const parser: Function = schemaParser(actions.array);
 	for (let value in anything) {
