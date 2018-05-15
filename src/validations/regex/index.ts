@@ -7,3 +7,4 @@ let regex = {};
 );
 
 export default regex;
+
