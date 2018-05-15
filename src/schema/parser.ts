@@ -1,12 +1,13 @@
-export {};
-const schemaParser = (isArray: Function) => {
+import tryCatch from '../exceptions'
+
+export const schemaParser = (isArray: Function) => {
 	return (schema: any, value: string) => {
 		let validations = [];
-		try {
-			isArray(schema) ? schema.map((x) => validations.push(x(value))) : validations.push(schema(value));
-		} catch (error) {}
-		return validations.filter(Boolean).length === validations.length;
+		
+		isArray(schema) 
+			? schema.map((func) => validations.push(tryCatch(func, value))) 
+			: validations.push(tryCatch(schema, value));
+		
+		return validations
 	};
 };
-
-module.exports = schemaParser;

@@ -1,4 +1,4 @@
-let types = {
+export const types = {
 	isType: (type: any, test: any) =>
 		test.constructor === type && test !== undefined && ![null].includes(test),
 	number: (n: number) => types.isType(Number, n),
@@ -9,5 +9,3 @@ let types = {
 	positive: (n: number) => types.number(n) && n > 0,
 	negative: (n: number) => types.number(n) && n < 0,
 };
-
-module.exports = types;
