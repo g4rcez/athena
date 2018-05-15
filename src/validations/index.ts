@@ -1,4 +1,3 @@
-export {};
-const validation = require('./validation');
+import validation from './validation';
 
-module.exports = validation;
+export default validation;

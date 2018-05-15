@@ -1,5 +1,4 @@
-export {};
-const regex = require('./regex');
+import regex from './regex';
 
 let withDay: RegExp = regex.dayMonthYearWithMonthValidation;
 let withMonth: RegExp = regex.monthDayYearWithMonthValidation;
@@ -37,4 +36,4 @@ const dates = {
 	},
 };
 
-module.exports = dates;
+export default dates;

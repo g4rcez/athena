@@ -6,4 +6,5 @@ let regex = {};
 	Object.keys(group).forEach((x) => (regex[x] = group[x])),
 );
 
-module.exports = regex;
+export default regex;
+

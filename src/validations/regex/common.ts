@@ -1,4 +1,5 @@
-module.exports = {
+export default {
+	brazilianName: /^[A-ZÇa-zç 'ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÃẼĨÕŨãẽĩõũ]{1,205}$/,
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
 	username: /^[a-z_\-0-9]{1,64}$/,
 	password: /^[a-zA-Z_\-0-9()"'!@#$%&*+=\\]{1,256}$/,
