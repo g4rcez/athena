@@ -9,6 +9,15 @@ const types = {
 	array: (a: Array<any>) => types.isType(Array, a),
 	positive: (n: number) => types.number(n) && n > 0,
 	negative: (n: number) => types.number(n) && n < 0,
+	isJson: (n: any) => {
+		try {
+			JSON.parse(n);
+			return true;
+		} catch (error) {
+			return false;
+		}
+	},
+	isObject: (obj) => Object(obj) === obj && typeof obj === 'object' && !Array.isArray(obj),
 };
 
 module.exports = types;
