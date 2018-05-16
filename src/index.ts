@@ -1,3 +1,3 @@
-const validation = require('./validations');
+import validation from './validations';
 
-module.exports = Object.freeze(validation);
+export default validation;

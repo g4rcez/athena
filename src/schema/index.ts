@@ -1,3 +1,3 @@
-const schemaParser = require('./parser');
+import { schemaParser } from './parser';
 
-module.exports = schemaParser;
+export default schemaParser;

@@ -1,4 +1,4 @@
-const type: any = require('./types');
+import {types as type} from './types';
 
 const verify = (rest: number) => rest == 10 || rest == 11;
 const modRest = (sum: number) => (sum * 10) % 11;
@@ -24,4 +24,4 @@ const cpf = (str: string) => {
 	return rest != parseInt(cpf.substring(10, 11)) ? false : true;
 };
 
-module.exports = cpf;
+export default cpf;

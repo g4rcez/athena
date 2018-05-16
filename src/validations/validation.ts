@@ -1,9 +1,8 @@
-export {};
-const type = require('./types');
-const dates = require('./dates');
-const Cpf = require('./cpf');
-const regex = require('./regex');
-const schemaParser = require('../schema');
+import {types as type} from './types';
+import dates from './dates';
+import Cpf from './cpf';
+import regex from './regex';
+import schemaParser from '../schema';
 
 let actions = {
 	regex: {},
@@ -32,8 +31,8 @@ let actions = {
 			? (s) => (actions.string(s) ? s.length <= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
-	positive: (n: number) => type.number.positive(n),
-	negative: (n: number) => type.number.negative(n),
+	positive: (n: number) => type.positive(n),
+	negative: (n: number) => type.negative(n),
 	validate: (anything: any, schema: object) => {},
 	isValid: (string: string, validationType: Function) => {},
 	cpf: (cpf: string) => {},
@@ -56,10 +55,12 @@ actions.cpf = (x) => Cpf(x);
 actions.validate = (schema, anything) => {
 	let validations = {};
 	const parser: Function = schemaParser(actions.array);
+	
 	for (let value in anything) {
 		const sourceTrue = parser(schema[value], anything[value]);
-		validations[value] = sourceTrue;
+		validations[value] = sourceTrue.length === 1 ? sourceTrue[0] : sourceTrue;
 	}
+	
 	return Object.keys(anything).length === Object.values(validations).filter(Boolean).length;
 };
 
@@ -69,5 +70,5 @@ actions.isValid = function(string: string, validationType: any) {
 	return string === undefined ? false : fn(string);
 };
 
-actions = Object.freeze(actions);
-module.exports = actions;
+;
+export default Object.freeze(actions);

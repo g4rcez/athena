@@ -1,6 +1,7 @@
-const validation = require('../src');
-const schema = require('./schemas');
-const expect = require('expect');
+import validation from '../src';
+import schema from './schemas';
+import expect from 'expect';
+import mocha from 'mocha';
 
 describe('User Schema', () => {
 
@@ -14,9 +15,7 @@ describe('User Schema', () => {
 
 		const result = validation.validate(data, schema.user);
 
-	});
-
-	it('should failed username and email inputs', () => {
+		expect(result).toBe(true);
 
 	});
 
