@@ -1,4 +1,4 @@
-import regex from './regex';
+import regex from './regex/common';
 
 let withDay: RegExp = regex.dayMonthYearWithMonthValidation;
 let withMonth: RegExp = regex.monthDayYearWithMonthValidation;

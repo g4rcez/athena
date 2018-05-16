@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	brazilianName: /^[A-ZÇa-zç 'ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÃẼĨÕŨãẽĩõũ]{1,205}$/,
 	cep: /^\d{5}(|-| )\d{3}$/,
 	cpf: /^((\d{3})(|\.)){2}(\d{3})(|-)\d{2}$/,

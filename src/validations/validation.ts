@@ -1,11 +1,11 @@
-import {types as type} from './types';
+import { types as type } from './types';
 import dates from './dates';
 import Cpf from './cpf';
 import regex from './regex';
 import schemaParser from '../schema';
-
 let actions = {
 	regex: {},
+	...regex,	
 	array: (a: Array<any>) => type.array(a),
 	string: (s: string) => type.string(s),
 	number: (n: number) => type.number(n),
@@ -55,12 +55,10 @@ actions.cpf = (x) => Cpf(x);
 actions.validate = (schema, anything) => {
 	let validations = {};
 	const parser: Function = schemaParser(actions.array);
-	
 	for (let value in anything) {
 		const sourceTrue = parser(schema[value], anything[value]);
 		validations[value] = sourceTrue.length === 1 ? sourceTrue[0] : sourceTrue;
 	}
-	
 	return Object.keys(anything).length === Object.values(validations).filter(Boolean).length;
 };
 
@@ -70,5 +68,4 @@ actions.isValid = function(string: string, validationType: any) {
 	return string === undefined ? false : fn(string);
 };
 
-;
 export default Object.freeze(actions);

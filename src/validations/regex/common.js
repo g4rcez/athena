@@ -1,6 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+exports.__esModule = true;
+exports["default"] = {
     brazilianName: /^[A-ZÇa-zç 'ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÃẼĨÕŨãẽĩõũ]{1,205}$/,
     email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     username: /^[a-z_\-0-9]{1,64}$/,
@@ -21,5 +21,5 @@ exports.default = {
     timestampsNode: /(19|20)\d{2}(-\d{2}){2}T(0[1-9]|1\d|2[0-4])(:(0[1-9]|[1-5]\d)){2}.\d{3}Z/,
     creditCard: /(\d{4}(| )){3}\d{4}/,
     yes: RegExp('(yes|sim|y|s)', 'gi'),
-    no: RegExp('(n(a|ã)o|no|n)', 'gi'),
+    no: RegExp('(n(a|ã)o|no|n)', 'gi')
 };

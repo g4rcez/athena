@@ -1,4 +1,4 @@
-const regex = require('./src/index.ts');
+import regex from './src';
 const schema = {
 	name: regex.brazilianName,
 	username: { id: regex.number, string: regex.username },
@@ -14,5 +14,4 @@ const validate = regex.validate(
 	},
 	schema,
 );
-
-console.log(validate);
+console.log(regex);
