@@ -21,7 +21,7 @@ let februaryException = (date: string, mod: boolean) => {
 };
 
 const getYear = (date: string = '') => splitDate(date).pop();
-const yearToInt = (year: string = '', date: string = '') => {
+const intYear = (year: string = '', date: string = '') => {
 	let intYear: number = 1;
 	try {
 		let tmp: string = !!intYear ? intYear.toString() : '';
@@ -32,7 +32,7 @@ const yearToInt = (year: string = '', date: string = '') => {
 
 const dates = {
 	leapYear: (date: string) => {
-		return !!date.match(withDay) || !!date.match(withMonth) ? yearToInt(getYear(date), date) : false;
+		return !!date.match(withDay) || !!date.match(withMonth) ? intYear(getYear(date), date) : false;
 	},
 };
 

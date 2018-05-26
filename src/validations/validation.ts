@@ -1,11 +1,13 @@
 import { types as type } from './types';
 import dates from './dates';
+import { flat } from '../schema/recursion';
 import Cpf from './cpf';
 import regex from './regex';
-import schemaParser from '../schema';
+import { schemaParser } from '../schema/parser';
+import { recursive } from '../schema/recursion';
 let actions = {
 	regex: {},
-	...regex,	
+	...regex,
 	array: (a: Array<any>) => type.array(a),
 	string: (s: string) => type.string(s),
 	number: (n: number) => type.number(n),
@@ -17,18 +19,18 @@ let actions = {
 	},
 	minLength: (n: number) => {
 		return actions.number(n)
-			? (s) => (actions.string(s) ? s.length >= n : `${s} is not a string`)
+			? s => (actions.string(s) ? s.length >= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
 	min: (n: number) => {
-		return actions.number(n) ? (s) => s >= n : false;
+		return actions.number(n) ? s => s >= n : false;
 	},
 	max: (n: number) => {
-		return actions.number(n) ? (s) => s <= n : false;
+		return actions.number(n) ? s => s <= n : false;
 	},
 	maxLength: (n: number) => {
 		return actions.number(n)
-			? (s) => (actions.string(s) ? s.length <= n : `${s} is not a string`)
+			? s => (actions.string(s) ? s.length <= n : `${s} is not a string`)
 			: `${n} is not a number`;
 	},
 	positive: (n: number) => type.positive(n),
@@ -49,17 +51,14 @@ Object.keys(regex).forEach(function(validation) {
 });
 
 // @Override
-actions.cpf = (x) => Cpf(x);
+actions.cpf = x => Cpf(x);
 
 // Validations with schema
-actions.validate = (schema, anything) => {
-	let validations = {};
-	const parser: Function = schemaParser(actions.array);
-	for (let value in anything) {
-		const sourceTrue = parser(schema[value], anything[value]);
-		validations[value] = sourceTrue.length === 1 ? sourceTrue[0] : sourceTrue;
-	}
-	return Object.keys(anything).length === Object.values(validations).filter(Boolean).length;
+actions.validate = (schema: Object, anything: Object) => {
+	let validations: Object = {};
+	const mapper: Array<string> = recursive(schema);
+	const truth: Array<any> = mapper.map(x => schemaParser(actions.array)(x, schema, anything));
+	return mapper.length === truth.filter(Boolean).length;
 };
 
 // Validate one string value

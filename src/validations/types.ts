@@ -1,6 +1,5 @@
 export const types = {
-	isType: (type: any, test: any) =>
-		test.constructor === type && test !== undefined && ![null].includes(test),
+	isType: (type: any, test: any) => test.constructor === type && test !== undefined && ![null].includes(test),
 	number: (n: number) => types.isType(Number, n),
 	integer: (s: number) => types.isType(Number, s),
 	float: (f: number) => types.isType(Number, f) && f % 1 !== 0,
@@ -16,7 +15,5 @@ export const types = {
 			return false;
 		}
 	},
-	isObject: (obj) => Object(obj) === obj && typeof obj === 'object' && !Array.isArray(obj),
+	isObject: obj => Object(obj) === obj && typeof obj === 'object' && !Array.isArray(obj),
 };
-
-module.exports = types;
