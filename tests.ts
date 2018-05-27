@@ -1,19 +1,29 @@
-import regex from './src';
+import JsValidate from './src';
+
 const schema = {
-	name: regex['brazilianName'],
-	username: { id: regex.number, string: regex['username'] },
-	age: [regex.integer, regex.max(32)],
-	cpf: regex.cpf,
-	rg: regex['rg'],
+	username: [JsValidate['username'], JsValidate.string],
+	age: [JsValidate.integer, JsValidate.max(32)],
+	name: JsValidate['brazilianName'],
+	link: JsValidate['link'],
+	rg: JsValidate['rg'],
+	jwt: JsValidate.jwt,
+	code: JsValidate['base64'],
+	cpf: [JsValidate.cpf, JsValidate.equals('070.680.938-68')],
 };
-const validate = regex.validate(
+
+const isTrue = JsValidate.validate(
 	{
-		name: ['Fluffykins Fulano da Silva', 'Fuckerson Santos'],
-		username: { id: 1, string: 'username' },
-		age: [18, 19, 20, 29, 31],
+		name: 'Fluffykins Fulano da Silva',
+		username: 'username',
+		link: 'http://facebook.com',
+		jwt:
+			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 		cpf: '070.680.938-68',
+		code: 'SGVsbG8gd29ybGQK',
 		rg: 'AA-11.010.000',
+		age: 23,
 	},
 	schema,
 );
-console.log(validate);
+
+console.log(isTrue);

@@ -1,6 +1,6 @@
-import regex from './regex/common';
+import regex from './regex/dates';
 
-let withDay: RegExp = regex.dayMonthYearWithMonthValidation;
+let withDay: RegExp = regex.dayMonthYearWithMonthValidation
 let withMonth: RegExp = regex.monthDayYearWithMonthValidation;
 let monthInt = 0;
 

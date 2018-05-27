@@ -2,23 +2,23 @@
 	"name": "js-validations",
 	"version": "1.0.0",
 	"description": "A little collection with data validation, in Javascript...of course",
-	"main": "src/index.js",
+	"main": "build/index.js",
 	"scripts": {
 		"test": "mocha -r ts-node/register tests/**/*.test.ts",
 		"test-watch": "nodemon --exec \"npm test\""
 	},
 	"contributors": [
 		{
-			"jeanstartx": "https: //github.com/jeanstartx"
+			"jeanstartx": "https://github.com/jeanstartx"
 		}
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/vandalvnl/js-validations.git"
+		"url": "https://github.com/vandalvnl/js-validations.git"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"keywords": ["schema", "validation", "objects", "regex", "filter", "filters", ""],
+	"author": "vandalvnl <vandal.vnl.dev@gmail.com> (https://github.com/vandalvnl)",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/vandalvnl/js-validations/issues"
 	},
@@ -28,9 +28,7 @@
 		"@types/node": "^10.0.9",
 		"expect": "^22.4.3",
 		"mocha": "^5.1.1",
-		"ts-node": "^6.0.3"
-	},
-	"dependencies": {
+		"ts-node": "^6.0.3",
 		"typescript": "^2.8.3"
 	}
 }

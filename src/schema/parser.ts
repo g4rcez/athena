@@ -1,6 +1,6 @@
 import tryCatch from '../exceptions';
 
-export const schemaParser = (isArray: Function) => {
+const schemaParser = (isArray: Function) => {
 	return (path: string, schema: object, object: object) => {
 		const val = eval(Object.keys({ schema })[0] + '.' + path);
 		const fns = eval(Object.keys({ object })[0] + '.' + path);
@@ -11,6 +11,12 @@ export const schemaParser = (isArray: Function) => {
 			} catch (e) {}
 			return values.filter(Boolean).length === val.length;
 		}
-		return isArray(fns) ? fns.map(x => tryCatch(x, val)) : tryCatch(fns, val);
+		const fnArr = isArray(fns) ? fns.map(x => tryCatch(x, val)) : tryCatch(fns, val);
+		try{
+			return fnArr.length === fnArr.filter(Boolean).length
+		}catch(e){}
+		return fnArr
 	};
 };
+
+export default schemaParser

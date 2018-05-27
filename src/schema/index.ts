@@ -1,3 +1,3 @@
-import { schemaParser } from './parser';
+import schemaParser from './parser';
 
 export default schemaParser;
