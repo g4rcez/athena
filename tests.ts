@@ -8,7 +8,8 @@ const schema = {
   rg: [JsValidate["rg"], JsValidate.string],
   jwt: [JsValidate.jwt, JsValidate.maxLength(155)],
   code: JsValidate["base64"],
-  cpf: [JsValidate.cpf, JsValidate.equals("070.680.938-68")]
+  cpf: [JsValidate.cpf, JsValidate.equals("070.680.938-68")],
+  secondary: JsValidate.startsWith("N")
 };
 
 const isTrue = JsValidate.validate(
@@ -17,11 +18,12 @@ const isTrue = JsValidate.validate(
     username: "username",
     link: "http://facebook.com",
     jwt:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
     cpf: "070.680.938-68",
     code: "SGVsbG8gd29ybGQK",
     rg: "AA-11.010.000",
-    age: 32
+    age: 32,
+	secondary: "Same",
   },
   schema
 );

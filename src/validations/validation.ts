@@ -22,8 +22,8 @@ let actions = {
   },
   minLength: (n: number) => {
     return actions.number(n)
-      ? s => (actions.string(s) ? s.length >= n : `${s} is not a string`)
-      : `${n} is not a number`;
+      ? s => (actions.string(s) ? s.length >= n : false)
+      : false;
   },
   min: (n: number) => {
     return actions.number(n) ? s => s >= n : false;
@@ -33,20 +33,30 @@ let actions = {
   },
   maxLength: (n: number) => {
     return actions.number(n)
-      ? s => (actions.string(s) ? s.length <= n : `${s} is not a string`)
-      : `${n} is not a number`;
+      ? s => (actions.string(s) ? s.length <= n : false)
+      : false;
   },
   equals: (anything: any) => {
-    if (typeof anything !== "string") {
-      return (newStr: any) => {
-        try {
-          return JSON.stringify(newStr) === JSON.stringify(anything);
-        } catch (error) {}
-        return false;
-      };
-    }
     return (newStr: any) => {
       return newStr === anything;
+    };
+  },
+  startsWith: (anything: any) => {
+    let regex = new RegExp(`^${anything}.*`);
+    return (newStr: any) => {
+      return !!newStr.match(regex);
+    };
+  },
+  contains: (anything: any) => {
+    let regex = new RegExp(`.*${anything}.*`);
+    return (newStr: any) => {
+      return !!newStr.match(regex);
+    };
+  },
+  endsWith: (anything: any) => {
+    let regex = new RegExp(`${anything}.*$`);
+    return (newStr: any) => {
+      return !!newStr.match(regex);
     };
   },
   positive: (n: number) => type.positive(n),
@@ -58,7 +68,6 @@ let actions = {
   jwt
 };
 
-// Create regex validations properties
 Object.keys(regex).forEach(function(validation) {
   actions[validation] = function(string) {
     let value = string.match(regex[validation]);
@@ -67,10 +76,8 @@ Object.keys(regex).forEach(function(validation) {
   actions.regex[validation] = regex[validation];
 });
 
-// @Override
 actions.cpf = x => Cpf(x);
 
-// Validations with schema
 actions.validate = (schema: Object, anything: Object) => {
   let validations: Object = {};
   const mapper: Array<string> = recursive(schema);
@@ -80,9 +87,8 @@ actions.validate = (schema: Object, anything: Object) => {
   return mapper.length === flat(truth).filter(Boolean).length;
 };
 
-// Validate one string value
-actions.isValid = function(string: string, validationType: any) {
-  let fn = actions[validationType];
+actions.isValid = (string: string, validate: any) => {
+  let fn = actions[validate];
   return string === undefined ? false : fn(string);
 };
 
