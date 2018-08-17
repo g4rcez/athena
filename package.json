@@ -2,17 +2,20 @@
 	"name": "js-validations",
 	"version": "1.0.0",
 	"description": "A little collection with data validation, in Javascript...of course",
-	"main": "build/index.js",
+	"homepage": "https://github.com/vandalvnl/js-validations#readme",
+	"main": "./dist/index.js",
 	"scripts": {
-		"test": "mocha -r ts-node/register tests/**/*.test.ts",
-		"test-watch": "nodemon --exec \"npm test\""
+		"watch": "babel -w src/ -d dist/",
+		"build": "babel src/ -d dist/",
+		"start": "babel -w src/ -d dist/ | nodemon --watch dist",
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"contributors": [
 		{
 			"jeanstartx": "https://github.com/jeanstartx"
 		}
 	],
-	"repository": {
+		"repository": {
 		"type": "git",
 		"url": "https://github.com/vandalvnl/js-validations.git"
 	},
@@ -30,13 +33,63 @@
 	"bugs": {
 		"url": "https://github.com/vandalvnl/js-validations/issues"
 	},
-	"homepage": "https://github.com/vandalvnl/js-validations#readme",
+	"babel": {
+		"presets": [
+			[
+				"env",
+				{
+					"targets": {
+						"node": "current"
+					}
+				}
+			]
+		],
+		"plugins": [
+			"transform-object-rest-spread",
+			"transform-class-properties"
+		]
+	},
+	"eslintConfig": {
+		"parser": "babel-eslint",
+		"plugins": [
+			"import",
+			"jest"
+		],
+		"parserOptions": {
+			"ecmaVersion": 2017,
+			"sourceType": "module"
+		},
+		"env": {
+			"node": true,
+			"jest": true
+		},
+		"extends": [
+			"eslint:recommended"
+		],
+		"rules": {
+			"jest/no-focused-tests": 2,
+			"jest/no-identical-title": 2
+		}
+	},
+	"jest": {
+		"testEnvironment": "node"
+	},
+	"dependencies": {
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"moment": "^2.22.2",
+		"ramda": "^0.25.0"
+	},
 	"devDependencies": {
-		"@types/mocha": "^5.2.0",
-		"@types/node": "^10.0.9",
-		"expect": "^22.4.3",
-		"mocha": "^5.1.1",
-		"ts-node": "^6.0.3",
-		"typescript": "^2.8.3"
-	}
+		"babel": "^6.23.0",
+		"babel-cli": "^6.26.0",
+		"babel-eslint": "^8.2.6",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-stage-0": "^6.24.1",
+		"babel-register": "^6.26.0",
+		"nodemon": "^1.18.3"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
