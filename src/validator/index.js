@@ -4,12 +4,11 @@ export default class JsValidation {
 	}
 
 	validate(name, value, validations) {
-		const isValid = validations.check(value);
 		this.validations.push({
 			name,
 			value,
-			isValid,
-			logs: JSON.stringify([...validations.rules]),
+			isValid: validations.check(value),
+			logs: [...validations.rules],
 		});
 		return this;
 	}
@@ -17,8 +16,26 @@ export default class JsValidation {
 	logs() {
 		return [...this.validations];
 	}
-
+	msgErrors(separator = "\t") {
+		const errors = {};
+		this.logs().forEach((x) => {
+			const message = x.logs
+				.filter((y) => !y.isValid)
+				.filter((x) => !x.isValid)
+				.reduce((acc, el) => acc + `${separator}${el.message}`, []);
+			if (message != "") {
+				errors[x.name] = message.trim().split(separator);
+			}
+		});
+		return errors;
+	}
 	allRight() {
-		return this.logs().filter((element) => element.isValid === true).length === this.logs().length;
+		return this.filter().length === this.logs().length;
+	}
+	hasErrors() {
+		return this.filter().length !== this.logs().length;
+	}
+	filter() {
+		return this.logs().filter((element) => element.isValid === true);
 	}
 }

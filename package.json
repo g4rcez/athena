@@ -3,19 +3,19 @@
 	"version": "1.0.0",
 	"description": "A little collection with data validation, in Javascript...of course",
 	"homepage": "https://github.com/vandalvnl/js-validations#readme",
-	"main": "./dist/index.js",
+	"main": "./dist/example.js",
 	"scripts": {
 		"watch": "babel -w src/ -d dist/",
 		"build": "babel src/ -d dist/",
-		"start": "babel -w src/ -d dist/ | nodemon --watch dist",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "babel -w src/ -d dist/ | nodemon --watch dist"
 	},
 	"contributors": [
 		{
-			"jeanstartx": "https://github.com/jeanstartx"
+			"name": "jeanstartx",
+			"url": "https://github.com/jeanstartx"
 		}
 	],
-		"repository": {
+	"repository": {
 		"type": "git",
 		"url": "https://github.com/vandalvnl/js-validations.git"
 	},
@@ -28,8 +28,6 @@
 		"filters",
 		""
 	],
-	"author": "vandalvnl <vandal.vnl.dev@gmail.com> (https://github.com/vandalvnl)",
-	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/vandalvnl/js-validations/issues"
 	},
@@ -89,7 +87,6 @@
 		"babel-register": "^6.26.0",
 		"nodemon": "^1.18.3"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC"
+	"author": "vandalvnl",
+	"license": "MIT"
 }
