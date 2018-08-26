@@ -1,5 +1,5 @@
 {
-	"name": "athena",
+	"name": "athena-validator",
 	"version": "1.0.0",
 	"description": "A little collection with data validation, in Javascript...of course",
 	"homepage": "https://github.com/vandalvnl/athena#readme",

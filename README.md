@@ -13,7 +13,7 @@ npm install --save athena
 ## Using
 
 ```javascript
-import Athena from "athena";
+import Athena from "athena-validator";
 const Validation = new Athena.Validator();
 const Rules = () => Athena.Rules.new();
 
