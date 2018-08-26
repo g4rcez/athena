@@ -1,9 +1,9 @@
 {
-	"name": "js-validations",
+	"name": "athena",
 	"version": "1.0.0",
 	"description": "A little collection with data validation, in Javascript...of course",
-	"homepage": "https://github.com/vandalvnl/js-validations#readme",
-	"main": "./dist/example.js",
+	"homepage": "https://github.com/vandalvnl/athena#readme",
+	"main": "./dist/index.js",
 	"scripts": {
 		"watch": "babel -w src/ -d dist/",
 		"build": "babel src/ -d dist/",
@@ -17,7 +17,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/vandalvnl/js-validations.git"
+		"url": "https://github.com/vandalvnl/athena.git"
 	},
 	"keywords": [
 		"schema",
@@ -29,7 +29,7 @@
 		""
 	],
 	"bugs": {
-		"url": "https://github.com/vandalvnl/js-validations/issues"
+		"url": "https://github.com/vandalvnl/athena/issues"
 	},
 	"babel": {
 		"presets": [

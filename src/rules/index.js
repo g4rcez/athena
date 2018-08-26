@@ -1,11 +1,12 @@
 import Cpf from "./cpf";
+import Cnpj from "./cnpj";
 import Range from "./range";
 import Email from "./email";
 import moment from "moment";
-import { JWT, IPV4, IPV6, HTTP, CREDIT_CARD } from "./regex";
 import Typeof from "../utils/typeof";
-import { equals as rEquals, isEmpty as rEmpty } from "ramda";
 import Strings from "../utils/strings";
+import { equals as rEquals, isEmpty as rEmpty } from "ramda";
+import { JWT, IPV4, IPV6, HTTP, CREDIT_CARD, UUID } from "./regex";
 export default class Rules {
 	constructor() {
 		this.rules = [];
@@ -13,6 +14,32 @@ export default class Rules {
 	static new() {
 		return new Rules();
 	}
+
+	static rulesName() {
+		return [
+			"email",
+			"cpf",
+			"cnpj",
+			"array",
+			"isEmpty",
+			"isJson",
+			"isDate",
+			"number",
+			"string",
+			"object",
+			"allUniq",
+			"negative",
+			"positive",
+			"blank",
+			"jwt",
+			"ipv4",
+			"http",
+			"ipv6",
+			"creditCard",
+			"uuid",
+		];
+	}
+
 	email(message) {
 		this.rules.push({
 			name: "email",
@@ -31,6 +58,15 @@ export default class Rules {
 		});
 		return this;
 	}
+	cnpj(message) {
+		this.rules.push({
+			name: "cnpj",
+			message: message,
+			fn: (string) => Cnpj(string),
+			isValid: false,
+		});
+		return this;
+	}
 	array(message) {
 		this.rules.push({
 			name: "array",
@@ -40,7 +76,6 @@ export default class Rules {
 		});
 		return this;
 	}
-
 	isEmpty(message) {
 		this.rules.push({
 			name: "isEmpty",
@@ -101,7 +136,7 @@ export default class Rules {
 	}
 	isAfterDate(after, message) {
 		this.rules.push({
-			name: "isDate",
+			name: "isAfterDate",
 			message,
 			compare: after,
 			fn: (value) => moment(value).isAfter(after),
@@ -111,7 +146,7 @@ export default class Rules {
 	}
 	isBeforeDate(before, message) {
 		this.rules.push({
-			name: "isDate",
+			name: "isBeforeDate",
 			message,
 			compare: before,
 			fn: (value) => moment(value).isBefore(before),
@@ -289,7 +324,7 @@ export default class Rules {
 	}
 	must(condition, message) {
 		this.rules.push({
-			name: "creditCard",
+			name: "must",
 			message,
 			fn: () => condition,
 			isValid: false,
@@ -298,9 +333,27 @@ export default class Rules {
 	}
 	mustBe(callback, message) {
 		this.rules.push({
-			name: "creditCard",
+			name: "mustBe",
 			message,
 			fn: (value) => callback(value),
+			isValid: false,
+		});
+		return this;
+	}
+	regex(regex, message) {
+		this.rules.push({
+			name: "creditCard",
+			message,
+			fn: (value) => new RegExp(regex).test(value),
+			isValid: false,
+		});
+		return this;
+	}
+	uuid(message) {
+		this.rules.push({
+			name: "uuid",
+			message,
+			fn: (value) => UUID.test(value),
 			isValid: false,
 		});
 		return this;

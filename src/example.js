@@ -1,31 +1,25 @@
-import { Rules, Validator } from "./index";
-const Validation = new Validator();
+import Athena from "./index";
 
-Validation.validate(
-	"email",
-	"vandal.vnl.dev@gmail.com",
-	Rules.new()
-		.email("Informe um email válido")
-		.startsWith("vandal")
-		.endsWith(".com"),
-)
-	.validate("range", "AA", Rules.new().minOrEquals(2))
-	.validate(
-		"blank",
-		"",
-		Rules.new()
-			.blank("Esse campo deve ser nulo")
-			.isEmpty("Mensagem de isEmpty"),
-	)
-	.validate("empty", {}, Rules.new().isEmpty())
-	.validate("mustBe", "Allan", Rules.new().mustBe((x) => x == "Allan", "Deu ruim mané"))
-	.validate("equals", [1], Rules.new().equals([1]))
-	.validate("cpf", "070.680.938-68", Rules.new().cpf())
-	.validate("ipv4", "192.168.1.133", Rules.new().ipv4())
-	.validate("isDate", "2018-08-29", Rules.new().isDate())
-	.validate("range", [1, 2, 3, 3, 4], Rules.new().max(6))
-	.validate("array", [1, 2, 3, 3, 4], Rules.new().array())
-	.validate("unique", [1, 2, 3, 4, 5, 6, 7, 8, 8], Rules.new().uniq(1))
-	.validate("object", { foo: { bar: "foobar" } }, Rules.new().object());
-console.log(Validation.msgErrors());
+const Validation = new Athena.Validator();
+const Rules = () => Athena.Rules.new()
+
+Validation.validate({ name: "cpf", value: "070.680.938-68" })
+	.validate({ name: "email", value: "vandal.vnl.dev@gmail.com" })
+	.validate({ name: "range", value: "AA", rules: Rules().minOrEquals(2) })
+	.validate({ name: "blank", value: " " })
+	.validate({ name: "isEmpty", value: {} })
+	.validate({
+		name: "mustBe",
+		value: "Name",
+		rules: Rules().mustBe((x) => x === "Name", "Valor diferente do esperado"),
+	})
+	.validate({ name: "equals", value: [1], rules: Rules().equals([1]) })
+	.validate({ name: "cnpj", value: "05.144.757/0001-72", rules: Rules().cnpj("CNPJ Inválido") })
+	.validate({ name: "ipv4", value: "192.168.1.133" })
+	.validate({ name: "isDate", value: "2018-08-29" })
+	.validate({ name: "range", value: [1, 2, 3, 3, 4], rules: Rules().max(6) })
+	.validate({ name: "array", value: [1, 2, 3, 3, 4] })
+	.validate({ name: "unique", value: [1, 2, 3, 4, 5, 6, 7, 8, 8], rules: Rules().uniq(1) })
+	.validate({ name: "object", value: { foo: { bar: "foobar" } } });
+console.log(JSON.stringify(Validation.msgErrors(), null, 4));
 console.log(Validation.allRight());
