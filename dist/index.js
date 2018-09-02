@@ -1,17 +1,9 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _validator = require("./validator");
-
-var _validator2 = _interopRequireDefault(_validator);
-
-var _rules = require("./rules");
-
-var _rules2 = _interopRequireDefault(_rules);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = { Rules: _rules2.default, Validator: _validator2.default };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const validator_1 = __importDefault(require("./validator"));
+const rules_1 = __importDefault(require("./rules"));
+exports.default = { Rules: rules_1.default, Validator: validator_1.default };
+//# sourceMappingURL=index.js.map

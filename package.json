@@ -1,13 +1,23 @@
 {
 	"name": "athena-validator",
-	"version": "1.0.0",
-	"description": "A little collection with data validation, in Javascript...of course",
+	"version": "2.0.0",
+	"description": "A little collection with data validation",
 	"homepage": "https://github.com/vandalvnl/athena#readme",
 	"main": "./dist/index.js",
 	"scripts": {
-		"watch": "babel -w src/ -d dist/",
-		"build": "babel src/ -d dist/",
-		"start": "babel -w src/ -d dist/ | nodemon --watch dist"
+		"start": "npm run watch",
+		"build": "npm run build-ts && npm run tslint",
+		"serve": "node dist/index.js",
+		"watch-node": "nodemon dist/index.js",
+		"watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+		"test": "jest --forceExit --coverage --verbose",
+		"watch-test": "npm run test -- --watchAll",
+		"build-ts": "tsc",
+		"watch-ts": "tsc -w",
+		"tslint": "tslint -c tslint.json -p tsconfig.json",
+		"debug": "npm run build && npm run watch-debug",
+		"serve-debug": "nodemon --inspect dist/index.js",
+		"watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
 	},
 	"contributors": [
 		{
@@ -30,6 +40,25 @@
 	],
 	"bugs": {
 		"url": "https://github.com/vandalvnl/athena/issues"
+	},
+	"dependencies": {
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"moment": "^2.22.2",
+		"ramda": "^0.25.0"
+	},
+	"devDependencies": {
+		"@types/ramda": "^0.25.37",
+		"babel": "^6.23.0",
+		"babel-cli": "^6.26.0",
+		"babel-eslint": "^8.2.6",
+		"babel-preset-es2015": "^6.24.1",
+		"babel-preset-stage-0": "^6.24.1",
+		"babel-register": "^6.26.0",
+		"concurrently": "^4.0.1",
+		"nodemon": "^1.18.3",
+		"tslint": "^5.11.0",
+		"typescript": "^3.0.1"
 	},
 	"babel": {
 		"presets": [
@@ -68,24 +97,6 @@
 			"jest/no-focused-tests": 2,
 			"jest/no-identical-title": 2
 		}
-	},
-	"jest": {
-		"testEnvironment": "node"
-	},
-	"dependencies": {
-		"babel-plugin-transform-class-properties": "^6.24.1",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
-		"moment": "^2.22.2",
-		"ramda": "^0.25.0"
-	},
-	"devDependencies": {
-		"babel": "^6.23.0",
-		"babel-cli": "^6.26.0",
-		"babel-eslint": "^8.2.6",
-		"babel-preset-es2015": "^6.24.1",
-		"babel-preset-stage-0": "^6.24.1",
-		"babel-register": "^6.26.0",
-		"nodemon": "^1.18.3"
 	},
 	"author": "vandalvnl",
 	"license": "MIT"

@@ -1,11 +1,7 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _regex = require("./regex");
-
-exports.default = function (string) {
-	return !!string ? _regex.EMAIL.test(string) : false;
+Object.defineProperty(exports, "__esModule", { value: true });
+const regex_1 = require("./regex");
+exports.default = (string) => {
+    return !!string ? regex_1.EMAIL.test(string) : false;
 };
+//# sourceMappingURL=email.js.map

@@ -1,60 +1,59 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _typeof = require("../utils/typeof");
-
-var _typeof2 = _interopRequireDefault(_typeof);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var max = function max(range, item) {
-	if (_typeof2.default.array(item) || _typeof2.default.string(item)) {
-		return item.length < range;
-	} else if (_typeof2.default.number(item)) {
-		return item < range;
-	}
-	return false;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var maxOrEquals = function maxOrEquals(range, item) {
-	if (_typeof2.default.array(item) || _typeof2.default.string(item)) {
-		return item.length <= range;
-	} else if (_typeof2.default.number(item)) {
-		return item <= range;
-	}
-	return false;
+Object.defineProperty(exports, "__esModule", { value: true });
+const Typeof_1 = __importDefault(require("../utils/Typeof"));
+const max = (range, item) => {
+    if (Typeof_1.default.array(item) || Typeof_1.default.string(item)) {
+        return item.length < range;
+    }
+    else if (Typeof_1.default.number(item)) {
+        return item < range;
+    }
+    return false;
 };
-var min = function min(range, item) {
-	if (_typeof2.default.array(item) || _typeof2.default.string(item)) {
-		return item.length > range;
-	} else if (_typeof2.default.number(item)) {
-		return item > range;
-	}
-	return false;
+const maxOrEquals = (range, item) => {
+    if (Typeof_1.default.array(item) || Typeof_1.default.string(item)) {
+        return item.length <= range;
+    }
+    else if (Typeof_1.default.number(item)) {
+        return item <= range;
+    }
+    return false;
 };
-var minOrEquals = function minOrEquals(range, item) {
-	if (_typeof2.default.array(item) || _typeof2.default.string(item)) {
-		return item.length >= range;
-	} else if (_typeof2.default.number(item)) {
-		return item >= range;
-	}
-	return false;
+const min = (range, item) => {
+    if (Typeof_1.default.array(item) || Typeof_1.default.string(item)) {
+        return item.length > range;
+    }
+    else if (Typeof_1.default.number(item)) {
+        return item > range;
+    }
+    return false;
 };
-var length = function length(range, item) {
-	if (_typeof2.default.array(item) || _typeof2.default.string(item)) {
-		return item.length == range;
-	} else if (_typeof2.default.number(item)) {
-		return item == range;
-	}
-	return false;
+const minOrEquals = (range, item) => {
+    if (Typeof_1.default.array(item) || Typeof_1.default.string(item)) {
+        return item.length >= range;
+    }
+    else if (Typeof_1.default.number(item)) {
+        return item >= range;
+    }
+    return false;
 };
-
+const length = (range, item) => {
+    if (Typeof_1.default.array(item) || Typeof_1.default.string(item)) {
+        return item.length == range;
+    }
+    else if (Typeof_1.default.number(item)) {
+        return item == range;
+    }
+    return false;
+};
 exports.default = {
-	max: max,
-	min: min,
-	length: length,
-	minOrEquals: minOrEquals,
-	maxOrEquals: maxOrEquals
+    max,
+    min,
+    length,
+    minOrEquals,
+    maxOrEquals
 };
+//# sourceMappingURL=range.js.map
