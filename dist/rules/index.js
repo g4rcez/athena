@@ -5,11 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cpf_1 = __importDefault(require("./cpf"));
 const cnpj_1 = __importDefault(require("./cnpj"));
+const date_1 = __importDefault(require("./date"));
 const range_1 = __importDefault(require("./range"));
 const email_1 = __importDefault(require("./email"));
-const moment_1 = __importDefault(require("moment"));
 const Typeof_1 = __importDefault(require("../utils/Typeof"));
-const Strings_1 = __importDefault(require("../utils/Strings"));
+const strings_1 = __importDefault(require("./strings"));
+const collections_1 = __importDefault(require("./collections"));
 const ramda_1 = require("ramda");
 const regex_1 = require("./regex");
 class Rules {
@@ -137,7 +138,7 @@ class Rules {
         this.rules.push({
             name: "isDate",
             message,
-            fn: (value) => moment_1.default(value).isValid(),
+            fn: (value) => date_1.default.isDate(value),
             isValid: false
         });
         return this;
@@ -147,7 +148,7 @@ class Rules {
             name: "isAfterDate",
             message,
             compare: after,
-            fn: (value) => moment_1.default(value).isAfter(after),
+            fn: (value) => date_1.default.isAfterDate(value, after),
             isValid: false
         });
         return this;
@@ -157,7 +158,7 @@ class Rules {
             name: "isBeforeDate",
             message,
             compare: before,
-            fn: (value) => moment_1.default(value).isBefore(before),
+            fn: (value) => date_1.default.isAfterDate(value, before),
             isValid: false
         });
         return this;
@@ -244,7 +245,7 @@ class Rules {
             name: "uniq",
             message,
             compare,
-            fn: (value) => value.filter((x) => x == compare).length == 1,
+            fn: (value) => collections_1.default.uniq(value, compare),
             isValid: false
         });
         return this;
@@ -253,7 +254,7 @@ class Rules {
         this.rules.push({
             name: "allUniq",
             message,
-            fn: (value) => [...new Set(value)].length == value.length,
+            fn: (value) => collections_1.default.allUniq(value),
             isValid: false
         });
         return this;
@@ -280,7 +281,7 @@ class Rules {
         this.rules.push({
             name: "blank",
             message,
-            fn: (value) => Strings_1.default.clear(value) == "",
+            fn: (value) => strings_1.default.blank(value),
             isValid: false
         });
         return this;

@@ -1,10 +1,11 @@
 import Cpf from "./cpf";
 import Cnpj from "./cnpj";
+import Dates from "./date";
 import Range from "./range";
 import Email from "./email";
-import moment from "moment";
 import Typeof from "../utils/Typeof";
-import Strings from "../utils/Strings";
+import Strings from "./strings";
+import Collections from "./collections";
 import { equals as rEquals, isEmpty as rEmpty } from "ramda";
 import { JWT, IPV4, IPV6, HTTP, CREDIT_CARD, UUID } from "./regex";
 export default class Rules {
@@ -138,7 +139,7 @@ export default class Rules {
     this.rules.push({
       name: "isDate",
       message,
-      fn: (value: string) => moment(value).isValid(),
+      fn: (value: string) => Dates.isDate(value),
       isValid: false
     });
     return this;
@@ -148,7 +149,7 @@ export default class Rules {
       name: "isAfterDate",
       message,
       compare: after,
-      fn: (value: string) => moment(value).isAfter(after),
+      fn: (value: string) => Dates.isAfterDate(value, after),
       isValid: false
     });
     return this;
@@ -158,7 +159,7 @@ export default class Rules {
       name: "isBeforeDate",
       message,
       compare: before,
-      fn: (value: string) => moment(value).isBefore(before),
+      fn: (value: string) => Dates.isAfterDate(value, before),
       isValid: false
     });
     return this;
@@ -245,8 +246,7 @@ export default class Rules {
       name: "uniq",
       message,
       compare,
-      fn: (value: Array<any>) =>
-        value.filter((x: any) => x == compare).length == 1,
+      fn: (value: Array<any>) => Collections.uniq(value, compare),
       isValid: false
     });
     return this;
@@ -255,7 +255,7 @@ export default class Rules {
     this.rules.push({
       name: "allUniq",
       message,
-      fn: (value: string) => [...new Set(value)].length == value.length,
+      fn: (value: Array<any>) => Collections.allUniq(value),
       isValid: false
     });
     return this;
@@ -282,7 +282,7 @@ export default class Rules {
     this.rules.push({
       name: "blank",
       message,
-      fn: (value: string) => Strings.clear(value) == "",
+      fn: (value: string) => Strings.blank(value),
       isValid: false
     });
     return this;

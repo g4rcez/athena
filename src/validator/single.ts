@@ -1,0 +1,15 @@
+import Typeof from "../utils/Typeof";
+import CPNJ from "./../rules/cnpj";
+import Collections from "../rules/collections";
+import * as Regex from "../rules/regex";
+import CPF from "../rules/cpf";
+export const email = (string: string) => Regex.EMAIL.test(string);
+export const cpf = (string: string) => CPF(string);
+export const cnpj = (string: string) => CPNJ(string);
+export const uuid = (string: string) => Regex.UUID.test(string);
+export const isJson = (string: string) => Typeof.isJson(string);
+export const isJwt = (string: string) => Regex.JWT.test(string);
+export const http = (string: string) => Regex.HTTP.test(string);
+export const ipv4 = (string: string) => Regex.IPV4.test(string);
+export const ipv6 = (string: string) => Regex.IPV6.test(string);
+export const allUniq = (string: Array<any>) => Collections.allUniq(string);
