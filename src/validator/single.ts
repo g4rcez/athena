@@ -14,6 +14,19 @@ const ipv4 = (string: string) => Regex.IPV4.test(string);
 const ipv6 = (string: string) => Regex.IPV6.test(string);
 const allUniq = (string: Array<any>) => Collections.allUniq(string);
 
+export interface IUniqValidator {
+  email(): boolean;
+  cpf(): boolean;
+  cnpj(): boolean;
+  uuid(): boolean;
+  isJson(): boolean;
+  isJwt(): boolean;
+  http(): boolean;
+  ipv4(): boolean;
+  ipv6(): boolean;
+  allUniq(): boolean;
+}
+
 export default {
   email,
   cpf,

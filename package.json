@@ -1,6 +1,6 @@
 {
 	"name": "athena-validator",
-	"version": "2.1.2",
+	"version": "2.1.5",
 	"description": "A little collection with data validation",
 	"homepage": "https://github.com/vandalvnl/athena#readme",
 	"main": "./dist/index.js",
@@ -12,8 +12,8 @@
 		"watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
 		"test": "jest --forceExit --coverage --verbose",
 		"watch-test": "npm run test -- --watchAll",
-		"build-ts": "tsc",
-		"watch-ts": "tsc -w",
+		"build-ts": "tsc -d",
+		"watch-ts": "tsc -w -d",
 		"tslint": "tslint -c tslint.json -p tsconfig.json",
 		"debug": "npm run build && npm run watch-debug",
 		"serve-debug": "nodemon --inspect dist/index.js",

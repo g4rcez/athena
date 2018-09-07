@@ -1,6 +1,6 @@
 import Rules from "../rules";
 import { has } from "ramda";
-export default class JsValidation {
+export default class Validation {
   private validations: Array<any>;
   constructor() {
     this.validations = [];
