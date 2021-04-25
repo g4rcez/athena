@@ -3,7 +3,7 @@ import Cnpj from "./cnpj";
 import Dates from "./date";
 import Range from "./range";
 import Email from "./email";
-import Typeof from "../utils/Typeof";
+import { Types } from "../utils/Typeof";
 import Strings from "./strings";
 import Collections from "./collections";
 import { equals as rEquals, isEmpty as rEmpty } from "ramda";
@@ -47,7 +47,7 @@ export default class Rules {
       "http",
       "ipv6",
       "creditCard",
-      "uuid"
+      "uuid",
     ];
   }
 
@@ -56,7 +56,7 @@ export default class Rules {
       name: "email",
       message: message,
       fn: (string: string) => Email(string),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -65,7 +65,7 @@ export default class Rules {
       name: "cpf",
       message: message,
       fn: (string: string) => Cpf(string),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -74,7 +74,7 @@ export default class Rules {
       name: "cnpj",
       message: message,
       fn: (string: string) => Cnpj(string),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -82,8 +82,8 @@ export default class Rules {
     this.rules.push({
       name: "array",
       message: message,
-      fn: (arr: Array<any>) => Typeof.array(arr),
-      isValid: false
+      fn: (arr: Array<any>) => Types.Array(arr),
+      isValid: false,
     });
     return this;
   }
@@ -92,7 +92,7 @@ export default class Rules {
       name: "isEmpty",
       message,
       fn: (arr: any) => rEmpty(arr),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -102,7 +102,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => rEquals(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -112,7 +112,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => new RegExp(`^${compare}`).test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -122,7 +122,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => new RegExp(`${compare}$`).test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -130,8 +130,8 @@ export default class Rules {
     this.rules.push({
       name: "isJson",
       message,
-      fn: (value: string) => Typeof.isJson(value),
-      isValid: false
+      fn: (value: string) => Types.Json(value),
+      isValid: false,
     });
     return this;
   }
@@ -140,7 +140,7 @@ export default class Rules {
       name: "isDate",
       message,
       fn: (value: string) => Dates.isDate(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -150,7 +150,7 @@ export default class Rules {
       message,
       compare: after,
       fn: (value: string) => Dates.isAfterDate(value, after),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -160,7 +160,7 @@ export default class Rules {
       message,
       compare: before,
       fn: (value: string) => Dates.isAfterDate(value, before),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -168,8 +168,8 @@ export default class Rules {
     this.rules.push({
       name: "number",
       message,
-      fn: (value: string) => Typeof.number(value),
-      isValid: false
+      fn: (value: string) => Types.Number(value),
+      isValid: false,
     });
     return this;
   }
@@ -177,8 +177,8 @@ export default class Rules {
     this.rules.push({
       name: "string",
       message,
-      fn: (value: string) => Typeof.string(value),
-      isValid: false
+      fn: (value: string) => Types.String(value),
+      isValid: false,
     });
     return this;
   }
@@ -186,8 +186,8 @@ export default class Rules {
     this.rules.push({
       name: "object",
       message,
-      fn: (value: string) => Typeof.isObject(value),
-      isValid: false
+      fn: (value: string) => Types.Object(value),
+      isValid: false,
     });
     return this;
   }
@@ -197,7 +197,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => Range.max(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -207,7 +207,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => Range.min(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -217,7 +217,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => Range.minOrEquals(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -227,7 +227,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => Range.maxOrEquals(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -237,7 +237,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: string) => Range.length(compare, value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -247,7 +247,7 @@ export default class Rules {
       message,
       compare,
       fn: (value: Array<any>) => Collections.uniq(value, compare),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -256,7 +256,7 @@ export default class Rules {
       name: "allUniq",
       message,
       fn: (value: Array<any>) => Collections.allUniq(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -264,8 +264,8 @@ export default class Rules {
     this.rules.push({
       name: "negative",
       message,
-      fn: (value: string) => Typeof.negative(value),
-      isValid: false
+      fn: (value: string) => Types.Negative(value),
+      isValid: false,
     });
     return this;
   }
@@ -273,8 +273,8 @@ export default class Rules {
     this.rules.push({
       name: "positive",
       message,
-      fn: (value: string) => Typeof.positive(value),
-      isValid: false
+      fn: (value: string) => Types.Positive(value),
+      isValid: false,
     });
     return this;
   }
@@ -283,7 +283,7 @@ export default class Rules {
       name: "blank",
       message,
       fn: (value: string) => Strings.blank(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -292,7 +292,7 @@ export default class Rules {
       name: "jwt",
       message,
       fn: (value: string) => JWT.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -301,7 +301,7 @@ export default class Rules {
       name: "ipv4",
       message,
       fn: (value: string) => IPV4.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -310,7 +310,7 @@ export default class Rules {
       name: "http",
       message,
       fn: (value: string) => HTTP.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -319,7 +319,7 @@ export default class Rules {
       name: "ipv6",
       message,
       fn: (value: string) => IPV6.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -328,7 +328,7 @@ export default class Rules {
       name: "creditCard",
       message,
       fn: (value: string) => CREDIT_CARD.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -337,7 +337,7 @@ export default class Rules {
       name: "must",
       message,
       fn: () => condition,
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -346,7 +346,7 @@ export default class Rules {
       name: "mustBe",
       message,
       fn: (value: string) => callback(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -355,7 +355,7 @@ export default class Rules {
       name: "creditCard",
       message,
       fn: (value: string) => new RegExp(regex).test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
@@ -364,13 +364,13 @@ export default class Rules {
       name: "uuid",
       message,
       fn: (value: string) => UUID.test(value),
-      isValid: false
+      isValid: false,
     });
     return this;
   }
   check(value: any) {
     const newList: Array<boolean> = [];
-    this.rules = this.rules.map(x => {
+    this.rules = this.rules.map((x) => {
       const isValid = x.fn(value);
       x.isValid = isValid;
       newList.push(isValid);

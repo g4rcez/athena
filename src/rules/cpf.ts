@@ -1,15 +1,12 @@
-import Typeof from "../utils/Typeof";
+import { Types } from "../utils/Typeof";
 import { CPF } from "./regex";
 const verify = (rest: number) => rest == 10 || rest == 11;
 const modRest = (sum: number) => (sum * 10) % 11;
 const cpfStr = (str: string) =>
-  str
-    .replace(/-/g, "")
-    .replace(/\./g, "")
-    .replace("/ /g", "");
+  str.replace(/-/g, "").replace(/\./g, "").replace("/ /g", "");
 
 const cpf = (str: string): boolean => {
-  if (!Typeof.string(str)) {
+  if (!Types.String(str)) {
     return false;
   }
   if (CPF.test(str)) {

@@ -1,14 +1,14 @@
-const types = {
-  isType: (t: any, c: any) =>
+export const Types = {
+  IsType: (t: any, c: any) =>
     c.constructor === t && c !== undefined && ![undefined].includes(c),
-  number: (n: any) => types.isType(Number, n),
-  integer: (s: any) => types.isType(Number, s),
-  float: (f: any) => types.isType(Number, f) && f % 1 !== 0,
-  string: (s: any) => types.isType(String, s),
-  array: (a: any) => Array.isArray(a),
-  positive: (n: any) => types.number(n) && n > 0,
-  negative: (n: any) => types.number(n) && n < 0,
-  isJson: (n: any) => {
+  Number: (n: any) => Types.IsType(Number, n),
+  Integer: (s: any) => Types.IsType(Number, s),
+  Float: (f: any) => Types.IsType(Number, f) && f % 1 !== 0,
+  String: (s: any) => Types.IsType(String, s),
+  Array: (a: any) => Array.isArray(a),
+  Positive: (n: any) => Types.Number(n) && n > 0,
+  Negative: (n: any) => Types.Number(n) && n < 0,
+  Json: (n: any) => {
     try {
       JSON.parse(n);
       return true;
@@ -16,8 +16,6 @@ const types = {
       return false;
     }
   },
-  isObject: (obj: any) =>
-    Object(obj) === obj && typeof obj === "object" && !Array.isArray(obj)
+  Object: (obj: any) =>
+    Object(obj) === obj && typeof obj === "object" && !Array.isArray(obj),
 };
-
-export default types;

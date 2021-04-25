@@ -1,6 +1,7 @@
 import Rules from "../rules";
 import { has } from "ramda";
-export default class Validation {
+
+export class Validation {
   private validations: Array<any>;
   constructor() {
     this.validations = [];
@@ -22,7 +23,7 @@ export default class Validation {
       name: object.name,
       value: object.value,
       isValid: rules.check(object.value),
-      logs: [...rules.$rules]
+      logs: [...rules.$rules],
     });
     return this;
   }
@@ -32,7 +33,7 @@ export default class Validation {
   }
   msgErrors() {
     const errors: any = {};
-    this.logs().forEach(x => {
+    this.logs().forEach((x) => {
       const message = x.logs
         .filter((y: any) => !y.isValid)
         .filter((x: any) => !x.isValid)
@@ -50,6 +51,6 @@ export default class Validation {
     return this.filter().length !== this.logs().length;
   }
   filter() {
-    return this.logs().filter(element => element.isValid === true);
+    return this.logs().filter((element) => element.isValid === true);
   }
 }

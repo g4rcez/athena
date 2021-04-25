@@ -1,6 +1,7 @@
-import Typeof from "./Typeof";
-const clear = (string: string) =>
-  Typeof.string(string)
+import { Types } from "./Typeof";
+
+const strip = (string: string) =>
+  Types.String(string)
     ? string
         .replace(/ /g, "")
         .replace(/\t/g, "")
@@ -8,6 +9,4 @@ const clear = (string: string) =>
         .replace(/\r/g, "")
     : "";
 
-export default {
-  clear
-};
+export default { Strip: strip };

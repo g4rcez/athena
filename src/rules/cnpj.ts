@@ -1,7 +1,7 @@
-import { CPNJ } from "./regex";
+import { CNPJ } from "./regex";
 
 const Cnpj = (string: string) => {
-  if (CPNJ.test(string)) {
+  if (CNPJ.test(string)) {
     const verifies = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
     const cnpj = string.replace(/[^\d]/g, "");
     if (cnpj == "00000000000000") {

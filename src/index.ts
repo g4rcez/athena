@@ -1,17 +1,11 @@
-import Validator from "./validator";
-import Rules from "./rules";
-import UniqValidator, { IUniqValidator } from "./validator/single";
+import Rule from "./rules";
+import { Validation } from "./validator";
 
-export default class Athena {
-  static validator(): Validator {
-    return new Validator();
-  }
+export const Validator = new Validation();
+export const Rules = () => new Rule();
 
-  static rules(): Rules {
-    return new Rules();
-  }
+const cpf = Rules().cpf("Error on CPF");
 
-  static uniqValidator(): object {
-    return { ...UniqValidator };
-  }
-}
+console.log(
+  Validator.validate({ name: "cpf", value: "aaa", rules: cpf }).msgErrors()
+);

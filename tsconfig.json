@@ -1,18 +1,29 @@
 {
 	"compilerOptions": {
-		"module": "umd",
 		"esModuleInterop": true,
 		"target": "es6",
-		"lib": ["es2018", "es7"],
+		"lib": [
+			"DOM",
+			"ESNext"
+		],
 		"noImplicitAny": true,
 		"moduleResolution": "node",
-		"sourceMap": true,
+		"sourceMap": false,
 		"outDir": "dist",
 		"skipLibCheck": true,
 		"baseUrl": ".",
-		"paths": {
-			"*": ["node_modules/*", "src/types/*"]
-		}
+		"allowJs": false,
+		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
+		"strict": true,
+		"downlevelIteration": true,
+		"importHelpers": true,
+		"strictNullChecks": true,
+		"skipDefaultLibCheck": true,
+		"strictFunctionTypes": true,
+		"noImplicitReturns": true
 	},
-	"include": ["src/**/*"]
+	"include": [
+		"src/**/*"
+	]
 }
